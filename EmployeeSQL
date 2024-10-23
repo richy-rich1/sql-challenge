@@ -1,1 +1,40 @@
+# Titles and employees have a one-to-many relationship
+titles
+-
+title_id VARCHAR PK
+title VARCHAR
 
+# Each employee has one title
+employees
+-
+emp_no INT PK
+emp_title_id VARCHAR FK >- titles.title_id
+birth_date DATE
+first_name VARCHAR
+last_name VARCHAR
+sex CHAR(1)
+hire_date DATE
+
+# Departments table
+departments
+-
+dept_no VARCHAR PK
+dept_name VARCHAR
+
+# Salaries have one-to-one relationship with employees
+salaries
+-
+emp_no INT PK FK - employees.emp_no
+salary INT
+
+# Bridge table for department managers (many-to-many)
+dept_manager
+-
+dept_no VARCHAR FK >- departments.dept_no
+emp_no INT FK >- employees.emp_no
+
+# Bridge table for department employees (many-to-many)
+dept_employee
+-
+emp_no INT FK >- employees.emp_no
+dept_no VARCHAR FK >- departments.dept_no
